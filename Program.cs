@@ -4,50 +4,64 @@ using System.Collections.Generic;
 
 App.Open<Test>();
 
-// public class Sprite : View
-// {
-//     Queue<int> queue = new Queue<int>();
-//     DateTime last;
-//     int k = 0;
+public class Player : View
+{
+    public Point Location
+    {
+        get => sprite.Rect.Location;
+        set => sprite.Rect = new Rectangle(
+            value, sprite.Rect.Size
+        );
+    }
 
-//     int i;
-//     RectangleF rect;
-//     RectangleF frame;
+    public Size Size
+    {
+        get => sprite.Rect.Size;
+        set => sprite.Rect = new Rectangle(
+            sprite.Rect.Location, value
+        );
+    }
 
-//     Bitmap img = null;
+    private Sprite<int> sprite;
 
-//     protected override void OnStart(IGraphics g)
-//     {   
-//         img = Bitmap.FromFile("sprites/carbo.png") as Bitmap;
-//         i = 6;
-//         rect = new RectangleF(300, 300, 2 * 40, 2 * 56);
-//         frame = new RectangleF(0, 0, 40, 56);
-//         last = DateTime.Now;
-//     }
- 
-
-//     protected override void OnRender(IGraphics g)
-//     {
-//         k++;
-//         if ((DateTime.Now - last).TotalSeconds >= 0.1)
-//         {
-//             queue.Enqueue(k);
-//             k = 0;
-//             last = DateTime.Now;
-//         }
-//         if (queue.Count > 10)
-//             queue.Dequeue();
-//         var fps = queue.Count == 0 ? 0 : 10 * queue.Average();
-//         g.DrawText(new RectangleF(500, 500, 100, 100), fps.ToString());
-//         g.DrawImage(rect, img, frame);
+    public Player()
+    {
+        var path = "sprites/carbo.png";
+        var spriteSheet = Bitmap.FromFile(path) as Bitmap;
+        var size = new Size(40, 56);
+        var desloc = new Size(0, size.Height);
         
-//         frame = new RectangleF(0, 56 * i, 40, 56);
+        var idle = SpriteController.Load(
+            spriteSheet, size,
+            PointF.Empty + 0 * desloc,
+            desloc, 1);
+        var attacking = SpriteController.Load(
+            spriteSheet, size,
+            PointF.Empty + 1 * desloc,
+            desloc, 4);
+        var jumping = SpriteController.Load(
+            spriteSheet, size,
+            PointF.Empty + 5 * desloc,
+            desloc, 1);
+        var walking = SpriteController.Load(
+            spriteSheet, size,
+            PointF.Empty + 6 * desloc,
+            desloc, 14);
+        
+        this.sprite = new Sprite<int>();
+        this.sprite.Animation.AddSprite(0, idle);
+        this.sprite.Animation.AddSprite(1, walking);
+        this.sprite.Animation.AddSprite(2, jumping);
+        this.sprite.Animation.AddSprite(3, attacking);
+        this.sprite.Animation.State = 1;
+        AddSubView(this.sprite);
+        
+        this.Location = new Point(300, 300);
+        this.Size = 2 * size;
 
-//         i++;
-//         if (i > 19)
-//             i = 6;
-//     }
-// }
+        AlwaysInvalidateMode();
+    }
+}
 
 public class Test : View
 {
@@ -68,15 +82,6 @@ public class Test : View
                     break;
             }
         });
-
-        var controller = SpriteController.Load("sprites/carbo.png", 
-            new Size(40, 56),
-            new PointF(0, 56 * 6),
-            new Size(0, 56), 14);
-
-        sprite = new Sprite<int>();
-        sprite.Animation.AddSprite(0, controller);
-        sprite.Rect = new Rectangle(300, 300, 80, 112);
 
         Content = new Container
         {
@@ -113,10 +118,9 @@ public class Test : View
                     );
                 }
             ),
-            sprite
+            new Player()
         };
     }
 
     private Button bt;
-    private Sprite<int> sprite;
 }

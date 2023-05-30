@@ -5,11 +5,7 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-
-  <!-- <ItemGroup>
-    <PackageReference Include="pamella" Version="1.6.0" />
-  </ItemGroup> -->
-
+  
   <ItemGroup>
     <ProjectReference Include="..\pamella\pamella.csproj" />
   </ItemGroup>
