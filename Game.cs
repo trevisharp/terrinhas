@@ -7,7 +7,7 @@ using Pamella.Views;
 public class Game : View
 {
     protected override void OnRender(IGraphics g)
-    { 
+    {
         g.Clear(Color.White);
     }
 
