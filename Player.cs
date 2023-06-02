@@ -14,7 +14,8 @@ public class Player : View
 
     public float Gravity { get; set; } = 500;
     public float Speed { get; set; } = 200;
-    public float JumpForce { get; set; } = 400;
+    public float JumpForce { get; set; } = 500;
+    public int JumpLimit { get; set; } = 1;
 
     // main data
     private string spritePath;
@@ -27,6 +28,8 @@ public class Player : View
     private bool tryLeft = false;
     private bool tryRight = false;
     private bool seeingRight = true;
+    private int jumpCount = 0;
+    private bool canJump = false;
 
     public Point Location
     {
@@ -178,20 +181,31 @@ public class Player : View
 
     private void getYVelocity(float secs, int groundLimit)
     {
-
         if (inGround)
         {
             this.Location = new Point(Location.X, groundLimit - this.Size.Height);
             Velocity = Velocity * Vector2.UnitX;
-
-            if (tryJump)
-                Velocity -= JumpForce * Vector2.UnitY;
+            jumpCount = 0;
+            canJump = true;
         }
         else
         {
             Velocity += Gravity * Vector2.UnitY * secs;
             this.sprite.Animation.State = PlayerState.Jumping;
+
+            if (jumpCount == 0)
+                jumpCount++;
         }
+
+        if (jumpCount < JumpLimit && tryJump && canJump && Velocity.Y > -JumpForce * 0.2f)
+        {
+            Velocity = Velocity * Vector2.UnitX - JumpForce * Vector2.UnitY;
+            jumpCount++;
+            canJump = false;
+        }
+
+        if (!tryJump)
+            canJump = true;
     }
 
     private void getXVelocity(float secs)
