@@ -6,9 +6,9 @@ using Pamella.Views;
 
 public class Game : View
 {
-    protected override void OnRender(IGraphics g)
+    protected override void OnFrame(IGraphics g)
     {
-        g.Clear(Color.White);
+        
     }
 
     protected override void OnStart(IGraphics g)
@@ -25,9 +25,15 @@ public class Game : View
 
         Content = new Container
         {
-            new Player("sprites/carbo.png")
+            Background.Open(
+                Color.LightBlue,
+                "sprites/back1.png",
+                "sprites/back2.png"
+            ),
+            new Carbo(),
+            new FPS()
         };
-
+    
         AlwaysInvalidateMode();
     }
 }

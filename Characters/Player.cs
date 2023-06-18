@@ -4,6 +4,8 @@ using System.Numerics;
 
 using Pamella;
 using Pamella.Views;
+using Pamella.Games;
+using Pamella.Providers.WindowsForms;
 
 public class Player : View
 {
@@ -27,9 +29,10 @@ public class Player : View
     private bool tryJump = false;
     private bool tryLeft = false;
     private bool tryRight = false;
-    private bool seeingRight = true;
     private int jumpCount = 0;
     private bool canJump = false;
+
+    internal bool seeingRight = true;
 
     public Point Location
     {

@@ -1,0 +1,50 @@
+Personagens:
+    1 passiva
+    2 ativos Q e E
+    1 ativo Cursor
+    2 combos
+    4 pontos do Sistema MACRO
+    2 das habilidades tem características da função
+
+Sistema de Energia:
+    Energia é um recurso limitado
+    Nem todos os personagens a recuperão
+    Passiva e 1 dos combos é grátis
+    Q, E e 1 dos combo são pagos com energia
+    Cursor tem versão paga e gratuita
+    Se com energia, Cursor usa a versão paga
+    Cursor quando gratuito fica mais fraco
+
+Sistema MACRO:
+    Mobilidade:
+        Ganha movimentos extras
+        Aumenta velocidade dos movimentos
+    Agressividade:
+        Aumenta dano das habilidades
+        Aumenta dano dos ataques
+    Controle:
+        Aumenta distância dos ataques
+        Facilita acerto dos ataques
+    Resiliência:
+        Aumenta vida e energia
+        Ganha regeneração de vida
+    Obstinação:
+        Ganha redução de recargas
+        Ganha recuperação de energia
+    
+Funções:
+    Suporte
+        MACRO 2y _0 _0 _x xy
+        Possui 2 habilidades de suporte
+    Assassino
+        MACRO xy 2y _x _0 _0
+        Possui 2 habilidades de dano concentrado
+    Atirador
+        MACRO _0 xy 2y _0 _x
+        Possui 2 habilidades em longo alcance
+    Fortaleza
+        MACRO _x _0 xy 2y _0
+        Possui 2 habilidades de absorção de dano
+    Lutador
+        MACRO _0 _x _0 xy 2y
+        Possui 2 habilidades de uso rápido
