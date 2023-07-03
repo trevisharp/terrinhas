@@ -8,7 +8,7 @@ Personagens:
 
 Sistema de Energia:
     Energia é um recurso limitado
-    Nem todos os personagens a recuperão
+    Nem todos os personagens a recuperam
     Passiva e 1 dos combos é grátis
     Q, E e 1 dos combo são pagos com energia
     Cursor tem versão paga e gratuita

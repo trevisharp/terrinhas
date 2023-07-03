@@ -30,7 +30,7 @@ public class SwordPlayer : Player
             return;
         }
 
-        // SetState(PlayerState.Attacking);
+        SetState(PlayerState.Attacking);
 
         var size = new Size(
             swordBmp.Width,
@@ -60,7 +60,7 @@ public class SwordPlayer : Player
 
         if (angle > 90)
         {
-            angle = -90;
+            angle = -45;
             onAttack = false;
         }
     }
