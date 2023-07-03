@@ -7,6 +7,14 @@ using Pamella.Views;
 using Pamella.Games;
 using Pamella.Providers.WindowsForms;
 
+public enum PlayerState
+{
+    Idle,
+    Walking,
+    Jumping,
+    Attacking
+}
+
 public class Player : View
 {
     public Player(string spritePath)
@@ -52,6 +60,9 @@ public class Player : View
 
     public Vector2 Position { get; set; }
     public Vector2 Velocity { get; set; }
+
+    protected void SetState(PlayerState state)
+        => this.sprite.Animation.State = state;
 
     protected override void OnStart(IGraphics g)
     {
@@ -248,13 +259,5 @@ public class Player : View
                 this.Size = new Size(-this.Size.Width, this.Size.Height);
             this.Location = new Point((int)Position.X - this.Size.Width, (int)Position.Y);
         }
-    }
-
-    private enum PlayerState
-    {
-        Idle,
-        Walking,
-        Jumping,
-        Attacking
     }
 }
